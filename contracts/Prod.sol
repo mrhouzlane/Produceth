@@ -2,13 +2,21 @@
 
 pragma solidity ^0.8.9;
 
-
-contract Produceth {
+contract Prod {
 
     address private artist; 
     address public owner;
 
     enum negociationState {started, agreement, signed}
+
+    constructor(address _company) {
+        owner = _company;
+    }
+
+    struct CC0  {
+        string name;
+        address DAO; 
+    }
 
     struct Production {
         uint id;
@@ -19,10 +27,10 @@ contract Produceth {
     }
 
     mapping (address =>  Production) addressToProduction;  
+    mapping (uint => bool) voteByNotes ; //mapping between aggregation of notes of the community on a feature vector and to YES/NO (true/false)
+    // If the moyenne(votes) > 5/10 -> True -> we start the mint. 
 
-    constructor(address _producerCompany) {
-        owner = _producerCompany;
-    }
+   
 
 
 
